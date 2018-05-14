@@ -1,0 +1,25 @@
+[{
+"itemType": "brownie",
+"price": 5.00,
+"quantity": 50
+},
+{
+"itemType": "red velvet cookie",
+"price": 3.75,
+"quantity": 27
+},
+{
+"itemType": "peanut butter cookie",
+"price": 2.50,
+"quantity": 35
+},
+{
+"itemType": "sugar dumpling",
+"price" : 4.50,
+"quantity": 50
+},
+{
+"itemType": "jelly donut",
+"price" : 2.50,
+"quantity": 100
+}]
