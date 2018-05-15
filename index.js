@@ -2,25 +2,39 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const path = require('path');
+const morgan = require('morgan');
 const PORT = process.env.PORT || 3001;
 
-const inventoryPath = path.join(__dirname, 'inventory.json'); // '/Users/adam.cooper/code/students/bakery-inventory-express/inventory.json'
+const bakedgoodsPath = path.join(__dirname, 'bakedgoods.json');
+
+app.use(morgan('dev'));
 
 app.get('/', (request, response) => {
 	response.send('The Slash Route is working.');
 });
 
-app.get('/inventory', (request, response) => {
-	fs.readFile(inventoryPath, 'utf-8', (error, inventoryJSON) => {
+app.get('/bakedgoods', (request, response) => {
+	fs.readFile(bakedgoodsPath, 'utf-8', (error, bakedgoodsJSON) => {
 		if (error) {
 			console.error(error);
 			return response.sendStatus(500);
 		}
-		const inventory = JSON.parse(inventoryJSON);
-		response.send(inventory);
+		const bakedgoods = JSON.parse(bakedgoodsJSON);
+		response.send(bakedgoods);
+	});
+});
+
+app.get('/bakedgoods/:id', (request, response) => {
+	fs.readFile(bakedgoodsPath, 'utf-8', (error, bakedgoodsJSON) => {
+		if (error) {
+			console.error(error);
+			return response.sendStatus(500);
+		}
+		const bakedgoods = JSON.parse(bakedgoodsJSON);
+		response.send(bakedgoods[parseInt(request.params.id)])
 	});
 });
 
 app.listen(PORT, () => {
-	console.log(`bakery-inventory-express: Express application is listening on port ${PORT}...`);
+	console.log(`bakery-bakedgoods-express: Express application is listening on port ${PORT}...`);
 });
